@@ -28,4 +28,6 @@ class AlterSortedManyToManyField(AlterField):
                 schema_editor.remove_field(m2m_model, m2m_model._meta.get_field_by_name(SORT_VALUE_FIELD_NAME)[0])
 
     def make_sort_by_field(self, model):
-        return models.IntegerField(name=SORT_VALUE_FIELD_NAME)
+        sort_by_field = models.fields.related.IntegerField(name=SORT_VALUE_FIELD_NAME)
+        setattr(sort_by_field, 'column', SORT_VALUE_FIELD_NAME)
+        return sort_by_field
